@@ -31,6 +31,8 @@ def prepareTags(analysis_path, fasta_path):
     fasta_dataframe = dict([(i,j) for i,j in zip(fasta_strings, fasta_names)]
     fasta_dataframe = pd.DataFrame(fasta_dict, sep = ",")
     classify = []
+    """tags should be sequences on basis of which you want to classify the species
+    """
     while True:
         take_genotyping_tags = input("Please enter the tags for this dataset:")
         classify.append(take_genotyping_tags)
