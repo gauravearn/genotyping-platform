@@ -1,3 +1,8 @@
+#Gaurav Sablok 
+#Senior Postdoctoral Fellow Faculty of Natural and Agricultural Sciences 
+#Room 7-35, Agricultural Sciences Building 
+#University of Pretoria, Private Bag X20 Hatfield 0028, 
+#South Africa 
 import os
 import pandas as pd
 def prepareTags(analysis_path, fasta_path):
