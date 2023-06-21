@@ -17,7 +17,7 @@ def prepareTags(analysis_path, fasta_path):
         print(f"the directory for the analysis of the tags \
             model has been created")
     os.chdir(os.path.join(analysis_path))
-    fasta_check = os.path.join(path)
+    fasta_check = os.path.join(fasta_path)
     fasta_strings = []
     fasta_names = []
     for i in os.listdir(fasta_check):
