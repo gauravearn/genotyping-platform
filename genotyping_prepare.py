@@ -5,6 +5,8 @@
 #South Africa 
 import os
 import pandas as pd
+import arguably
+@arguably.command
 def prepareTags(analysis_path, fasta_path):
     """
     a core function to prepare and tag the bacterial species or the 
@@ -12,7 +14,7 @@ def prepareTags(analysis_path, fasta_path):
     Arguments:
         path -- _give_the_path_to_the_fasta_files_
     """
-    if !os.path.exists(analysis_path):
+    if not os.path.exists(analysis_path):
         os.mkdir(analysis_path)
         print(f"the directory for the analysis of the tags \
             model has been created")
@@ -25,18 +27,16 @@ def prepareTags(analysis_path, fasta_path):
             with open(i, "r") as file:
                 for line in file.readlines():
                     if line.startswith(">"):
-                    fasta_names.append(line.strip().replace(">", ""))
+                        fasta_names.append(line.strip().replace(">", ""))
                 else:
                     fasta_strings.append(line.strip())
-    fasta_dataframe = dict([(i,j) for i,j in zip(fasta_strings, fasta_names)]
+    fasta_dataframe = dict([(i,j) for i,j in zip(fasta_strings, fasta_names)])
     fasta_dataframe = pd.DataFrame(fasta_dict, sep = ",")
     classify = []
-    """tags should be sequences on basis of which you want to classify the species
-    """
     while True:
         take_genotyping_tags = input("Please enter the tags for this dataset:")
         classify.append(take_genotyping_tags)
-        if take_genotyping_tags is "":
+        if take_genotyping_tags == "":
             break
     def mapping_genotyping(x):
         for i in range(len(take_genotyping_tags)):
@@ -45,11 +45,10 @@ def prepareTags(analysis_path, fasta_path):
             if take_genotyping_tags[i] not in x:
                 return "exclude"
     fasta_dataframe["genotyping_tags"] = fasta_dataframe["fasta_strings"].apply(mapping_genotyping)
-    return dict([(i,j) for i,j in zip(fasta_strings, fasta_names)],
-                classify, fasta_dataframe.info(), fasta_dataframe.columns,
-                fasta["genotyping_tags"].value_counts()
+    return dict([(i,j) for i,j in zip(fasta_strings, fasta_names)]),classify, fasta_dataframe.info(), \
+         fasta_dataframe.columns, fasta["genotyping_tags"].value_counts()
     with open(sequencing_run, "w") as sequencing:
         sequencing.write(fasta_dataframe.to_csv())
         sequencing.close()
-    if __name__== __main__:
-        main()
+if __name__== __main__:
+    arguably.run()
